@@ -44,7 +44,38 @@ function App() {
     setfirstLetter(firstLetter);
   }, [domain, imgUrl]);
 
+
+
+
+
+    const currentDate=new Date();
+    const currentTime =currentDate.getTime();
+    const seconds=currentDate.getSeconds();
+    const hours=currentDate.getHours();
+    const minutes=currentDate.getMinutes();
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
+
+    <>
     <div className="">
       {imgUrl ? (
         <img src={imgUrl} alt='icon'/>
@@ -53,8 +84,14 @@ function App() {
           {firstLetter}
         </div>
       )}
-      {domain}
+      {`${hours}:${minutes}:${seconds}`}
     </div>
+
+      <div>
+        {currentTime}
+      </div>
+
+    </>
   );
 }
 
