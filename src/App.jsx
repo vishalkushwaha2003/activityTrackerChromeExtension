@@ -8,12 +8,8 @@ function App() {
   const [startingTime, setStartingTime] = useState("");
   const [endTime, setEndTime] = useState(0);
   const [input, setInput] = useState("");
-  const [val,setVal]=useState(null);
+  const [val, setVal] = useState(null);
 
- 
- 
-
-   
   const sendHandler = (e) => {
     e.preventDefault();
 
@@ -46,8 +42,6 @@ function App() {
       { active: true, lastFocusedWindow: true },
       (activeTab) => {
         if (activeTab && activeTab.length > 0) {
-         
-
           const domain = getDomain(activeTab);
 
           setdomain(domain);
@@ -70,10 +64,6 @@ function App() {
     setfirstLetter(firstLetter);
   }, [domain, imgUrl]);
 
-
-
-  
-
   const getFetch = async () => {
     const res = await fetch("http://localhost:8000", {
       method: "GET",
@@ -82,22 +72,6 @@ function App() {
     const data = await res.json();
     setVal(data.message);
   };
-
-
-
-//timer
-
- 
-
-
-    
-
-
-
-
-
-
-
 
   return (
     <>
@@ -112,7 +86,6 @@ function App() {
         {domain}
       </div>
 
-      
       <div>
         <form action="" onSubmit={sendHandler}>
           <input
@@ -129,21 +102,10 @@ function App() {
       <div>
         <button onClick={getFetch}>fetch</button>
       </div>
-      {val &&<h1>{val}</h1>}
+      {val && <h1>{val}</h1>}
       <div>
-
-        <LoginButton/>
+        <LoginButton />
       </div>
-
-    {/* <div>
-        <h2 >timer</h2>
-      <div className="flex justify-between">
-      <button onClick={startTimer}>start</button>
-      <button onClick={stopTimer}>stop</button>
-      <button onClick={resetTimer}>reset</button>
-      </div>
-    </div> */}
-      
     </>
   );
 }
