@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 function App() {
   const [domain, setdomain] = useState("d");
   const [imgUrl, setImgUrl] = useState("1");
@@ -87,7 +86,7 @@ function App() {
       </div>
 
       <div>
-        <form action=""  onSubmit={sendHandler}>
+        <form action="" onSubmit={sendHandler}>
           <input
             type="text"
             value={input}
@@ -103,9 +102,7 @@ function App() {
         <button onClick={getFetch}>fetch</button>
       </div>
       {val && <h1>{val}</h1>}
-      <div>
-        
-      </div>
+     
     </>
   );
 }
