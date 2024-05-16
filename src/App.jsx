@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LoginButton from "./login/Login";
+
 
 function App() {
   const [domain, setdomain] = useState("d");
@@ -87,7 +87,7 @@ function App() {
       </div>
 
       <div>
-        <form action="" onSubmit={sendHandler}>
+        <form action=""  onSubmit={sendHandler}>
           <input
             type="text"
             value={input}
@@ -104,7 +104,7 @@ function App() {
       </div>
       {val && <h1>{val}</h1>}
       <div>
-        <LoginButton />
+        
       </div>
     </>
   );
