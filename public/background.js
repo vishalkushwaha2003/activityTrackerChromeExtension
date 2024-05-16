@@ -1,4 +1,8 @@
+importScripts('bg2.js');
+
+
 activeTabs = {};
+helperFunction();
 
 let hours = 0;
 let minutes = 0;
