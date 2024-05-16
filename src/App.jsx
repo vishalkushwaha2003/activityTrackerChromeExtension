@@ -1,9 +1,24 @@
 import React, { useEffect, useState } from "react";
+import LoginButton from "./login/Login";
 
 function App() {
   const [domain, setdomain] = useState("d");
   const [imgUrl, setImgUrl] = useState("1");
   const [firstLetter, setfirstLetter] = useState("f");
+  const [startingTime, setStartingTime] = useState("");
+  const [endTime, setEndTime] = useState(0);
+  const [input, setInput] = useState("");
+  const [val,setVal]=useState(null);
+
+ 
+ 
+
+   
+  const sendHandler = (e) => {
+    e.preventDefault();
+
+    chrome.runtime.sendMessage({ action: "getData", data: input });
+  };
 
   const getDomain = (activeTab) => {
     if (activeTab) {
@@ -17,16 +32,27 @@ function App() {
   };
 
   useEffect(() => {
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      console.log("i am hereeeeeeeeeeee");
+      if (message.action == "sendDataToPopup") {
+        var receivedData = message.data;
+        console.log(receivedData);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     chrome.tabs.query(
       { active: true, lastFocusedWindow: true },
       (activeTab) => {
-        console.log(activeTab);
+        if (activeTab && activeTab.length > 0) {
+         
 
-        const domain = getDomain(activeTab);
+          const domain = getDomain(activeTab);
 
-        setdomain(domain);
-
-        setImgUrl(activeTab[0].favIconUrl);
+          setdomain(domain);
+          setImgUrl(activeTab[0].favIconUrl);
+        }
       }
     );
   }, []);
@@ -46,13 +72,24 @@ function App() {
 
 
 
+  
+
+  const getFetch = async () => {
+    const res = await fetch("http://localhost:8000", {
+      method: "GET",
+    });
+
+    const data = await res.json();
+    setVal(data.message);
+  };
 
 
-    const currentDate=new Date();
-    const currentTime =currentDate.getTime();
-    const seconds=currentDate.getSeconds();
-    const hours=currentDate.getHours();
-    const minutes=currentDate.getMinutes();
+
+//timer
+
+ 
+
+
     
 
 
@@ -62,35 +99,51 @@ function App() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   return (
-
     <>
-    <div className="">
-      {imgUrl ? (
-        <img src={imgUrl} alt='icon'/>
-      ) : (
-        <div class="w-10 h-10 rounded-full bg-emerald-200 flex items-center justify-center text-2xl font-medium">
-          {firstLetter}
-        </div>
-      )}
-      {`${hours}:${minutes}:${seconds}`}
-    </div>
-
-      <div>
-        {currentTime}
+      <div className="w-[300px] h-[400px] ">
+        {imgUrl ? (
+          <img src={imgUrl} alt="icon" />
+        ) : (
+          <div class="w-10 h-10 rounded-full bg-emerald-200 flex items-center justify-center text-2xl font-medium">
+            {firstLetter}
+          </div>
+        )}
+        {domain}
       </div>
 
+      
+      <div>
+        <form action="" onSubmit={sendHandler}>
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+            }}
+          />
+          <button type="submit">send</button>
+        </form>
+      </div>
+
+      <div>
+        <button onClick={getFetch}>fetch</button>
+      </div>
+      {val &&<h1>{val}</h1>}
+      <div>
+
+        <LoginButton/>
+      </div>
+
+    {/* <div>
+        <h2 >timer</h2>
+      <div className="flex justify-between">
+      <button onClick={startTimer}>start</button>
+      <button onClick={stopTimer}>stop</button>
+      <button onClick={resetTimer}>reset</button>
+      </div>
+    </div> */}
+      
     </>
   );
 }
