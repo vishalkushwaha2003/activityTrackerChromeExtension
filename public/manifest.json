@@ -1,21 +1,19 @@
 {
-    "manifest_version": 3,
-    "name": "Activity Tracker",
-    "version": "1.0.0",
-    "description": "Track and manage desktop browsing habits. Set goals for social media usage. Receive real-time notifications. Foster mindful online balance.",
-    "action": {
-        "default_popup": "./index.html"
-      },
-      "background": {
-        "service_worker": "./background.js"
-      },
-    
-      "permissions": ["tabs", "activeTab","webNavigation","storage"],
-      
-      "icons": {
-        
-        "48": "3d2.png",
-        "128": "3d2.png"
-      }
-    
+  "manifest_version": 3,
+  "name": "Activity Tracker",
+  "version": "1.0.0",
+  "description": "Track and manage desktop browsing habits. Set goals for social media usage. Receive real-time notifications. Foster mindful online balance.",
+  "action": {
+    "default_popup": "./index.html"
+  },
+  "background": {
+    "service_worker": "./background.js"
+  },
+
+  "permissions": ["tabs", "activeTab", "webNavigation", "storage"],
+
+  "icons": {
+    "48": "3d2.png",
+    "128": "3d2.png"
   }
+}

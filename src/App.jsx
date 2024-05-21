@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import Carousel from "./caresol/Carousel";
+import BackgroundAnimation from "./background/BackgroundAnimation";
 
 function App() {
   const [domain, setdomain] = useState("d");
@@ -8,6 +10,12 @@ function App() {
   const [endTime, setEndTime] = useState(0);
   const [input, setInput] = useState("");
   const [val, setVal] = useState(null);
+
+
+
+
+
+
 
   const sendHandler = (e) => {
     e.preventDefault();
@@ -63,29 +71,59 @@ function App() {
     setfirstLetter(firstLetter);
   }, [domain, imgUrl]);
 
-  const getFetch = async () => {
-    const res = await fetch("http://localhost:8000", {
-      method: "GET",
-    });
+  // const getFetch = async () => {
+  //   const res = await fetch("http://localhost:8000", {
+  //     method: "GET",
+  //   });
 
-    const data = await res.json();
-    setVal(data.message);
-  };
+  //   const data = await res.json();
+  //   setVal(data.message);
+  // };
+
+
+
+
+
+
+
+
+
 
   return (
     <>
-      <div className="w-[300px] h-[400px] ">
+     
+      <div className="w-[300px] h-[400px] bg-black overflow-y-scroll ">
+        
+      <BackgroundAnimation/>
+      <Carousel />
+       
+       
+        {/* <div className="flex gap-1 ">
         {imgUrl ? (
+          <div class="w-5 h-5 bg-transparent flex items-center justify-center ">
           <img src={imgUrl} alt="icon" />
+          </div>
         ) : (
-          <div class="w-10 h-10 rounded-full bg-emerald-200 flex items-center justify-center text-2xl font-medium">
+          <div class="w-5 h-5  rounded-full border-[0.5px]  border-white text-white bg-transparent flex items-center justify-center text-sm font-small">
             {firstLetter}
           </div>
         )}
+        <div className="text-white">
         {domain}
+        </div>
+        </div> */}
+
+
+       
+        
+       
+       
+
+      
+        
       </div>
 
-      <div>
+      {/* <div>
         <form action="" onSubmit={sendHandler}>
           <input
             type="text"
@@ -96,13 +134,12 @@ function App() {
           />
           <button type="submit">send</button>
         </form>
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <button onClick={getFetch}>fetch</button>
       </div>
-      {val && <h1>{val}</h1>}
-     
+      {val && <h1>{val}</h1>} */}
     </>
   );
 }
